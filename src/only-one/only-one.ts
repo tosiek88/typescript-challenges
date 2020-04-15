@@ -9,31 +9,28 @@
 * Hint: https://www.typescriptlang.org/docs/handbook/advanced-types.html#type-guards-and-differentiating-types
 */
 
-interface IEatable{ //Can eat ;)
-    eat:()=>string;
-}
 
-class Monkey implements IEatable{
-    eat() {
+class Monkey {
+    eatBanana() {
         return 'Eating banana!'
     }
 }
 
-class Snake implements IEatable{
-    eat() {
+class Snake {
+    eatMouse() {
         return 'Eating mouse!'
     }
 }
 
-const monkey = new Monkey()
-const snake = new Snake()
+const monkey = new Monkey() as AnimalInZoo
+const snake = new Snake() as AnimalInZoo
 
-type AnimalInZoo = Monkey | Snake
-//Animal shoul implement behavior - eat
+type AnimalInZoo = Monkey & Snake
+
+
+
 function eatSomething(animal: AnimalInZoo) {
-
-   return animal.eat();
-    
+    return animal.eatBanana?animal.eatBanana():animal.eatMouse();
 }
 
 /* Do not modify tests */
